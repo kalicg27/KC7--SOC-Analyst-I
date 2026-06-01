@@ -1,0 +1,46 @@
+Notes VirusTotal Fundamentals
+
+Stage one - gathering info
+
+Masquerading ID - T1036 (MITRE ATT&CK Technique ID) Enterprice
+DLL Search Order Hijacking - T1574.001
+
+3CX - was distributed of malicious attacks by its product VOIP in 2023
+
+exe flle
+first submission - 2021-06-18 09:31:41 UTC
+file creation time- 2040-03-02 02:49:27 UTC
+
+masquerading - is the teachnique that changes the name of the file to make it look funky, although it's legitimate
+changing the name of a file doesn't affect its file hash. 
+
+c/c++ compiler version =  19.28.29395 (xx.xx.xxxx)
+
+hash we used = 4788925332fc6128c895b0e0736a1d7d90e3891f2abb456523cbf0c1ced7d1e2
+first signer of this hash - Heart Craft Brewery s. r. o.
+
+549ff37e56d372d076a3d11cd33af660568dc1048b1f4ecce77d8b334582c6c8
+first signer = M-Trans Maciej Caban
+rule yaml INDICATOR_EXE_DotNET_Encrypted
+
+a50bcbf0ef744f6b7780685cfd2f41a13be4c921d4b401384efd85c6109d7c00
+popular label = trojan.stealer/msil
+threat actor = JuiceLedger
+
+a54ca708c3bbef76dbaec817a9bb36d8b52e492b293d2127cd5be284caabb6d1 this is Batloader malware
+distributed by fake software websites - this technique ID is T1583.008. subtechniques
+learn to leave comments after analysing the hash or file
+
+0221bf1e1bd171c17527a863531518a95bcc025c87888e66b9512a5651073d16
+uploaded with another name = IRS_form_Package_17-01-2023_19-25-53.exe
+malware family name = icedid
+affected domain = plivetrakoy.com
+193.149.180.175 this ip address solved the domain 
+All bad
+
+0221bf1e1bd171c17527a863531518a95bcc025c87888e66b9512a5651073d16
+IRS_form_Package_17-01-2023_19-25-53 (1).zip - sha-1 :85d1e350486fea5945f46842685f248340fbf7dc
+
+2bf0a64fe7aea262c96fc7d52b1e28486ff607caa9513fd88583e19454f9c500 
+certificate status = revoked
+
