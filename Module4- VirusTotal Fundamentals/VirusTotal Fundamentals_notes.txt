@@ -43,4 +43,23 @@ IRS_form_Package_17-01-2023_19-25-53 (1).zip - sha-1 :85d1e350486fea5945f4684268
 
 2bf0a64fe7aea262c96fc7d52b1e28486ff607caa9513fd88583e19454f9c500 
 certificate status = revoked
+creation time = 1992-06-19 22:22:17 UTC
+compiler name = Borland Delphi
 
+the ddl file =	WABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZoYDHNFTTPDJL50NWXNEWCHBUDCPJOeEZNbd
+
+2bf0a64fe7aea262c96fc7d52b1e28486ff607caa9513fd88583e19454f9c500 file size = 
+301.35 MB
+
+Debloat is the toold that uses technique by deflating file 
+
+debloated version 71d5a558096b640366dbc711ef2870c0269b4138352bb98da0be30d9b6d6bb9b = file size = 
+2.52 MB
+
+%APPDATA%\microsoft\windows\start menu\programs\startup\
+
+HKEY_CURRENT_USER- its the full name of the registry hive
+powershell 
+
+AES - cryptography was used in rha keys
+our file child process is powershell.exe
