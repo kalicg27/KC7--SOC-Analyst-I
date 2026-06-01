@@ -3,3 +3,29 @@ Lock Byte the company name
 
 321 dekstops was affected by this encryption
 6,420 files in total was encrypted
+
+ssh- 97c348e95c8a8aeb8808f76434d73a92bbcb6b4586788365762b22624990b018 - for the file We_Have_Your_Data_Pay_Up.txt
+full path of ransom file- C:\Users\andavis\Documents\We_Have_Your_Data_Pay_Up.txt
+only 1 computer has this file
+
+First we should find out how this ransom might have happened!
+
+the hostname that has ransom file = AMFB-MACHINE
+employee = andavis username, full name =Anthony Davis, Ip 10.10.0.1
+14 process has happened during 06.17-06.18
+user downloaded the file = lockbyte_ransomer.exe, - then it gave new name = spread_ransomware.exe
+hacker used = patient_data_exporter.exe, tool to export data of patient 
+he stole = \\jojos-hospital-server\important_data\patient_records - in patient1.zip
+patient2.zip = \\jojos-hospital-server\important_data\archive\patient-records
+patient3.zip = \\jojos-hospital-server\important_data\old-patient-data
+
+attacker used curl command to sent it out the door
+domain that he used to send the files = secure-health-access.com
+to delete trace he used command to delete all files = cmd.exe /c del C:\Users\andavis\Documents\patient_data_*.zip
+secure-health-access.com
+6/17/2024, 2:22:29 PM - time it downloaded 
+only 2 ip address uses this domain = secure-health-access.com
+203.0.113.1
+203.0.113.2
+additional domain that was associated with those ip = emr-help.net
+they did 37 requests inside our network
