@@ -1,0 +1,129 @@
+DeviceInfo
+| summarize device_count=count() by vlan
+| order by device_count desc
+
+DeviceInfo
+| where vlan== 'dmz'
+| project name, ip_address, host_type
+
+DeviceInfo
+| where vlan == 'servers'
+| project name, ip_address
+
+DeviceInfo
+| where vlan=="restricted"
+| project name, ip_address, host_type
+
+DeviceInfo
+| where ip_address startswith "10.10.1."
+| project name, ip_address, vlan
+| take 5
+
+DeviceInfo
+| where name == 'DNS-Server'
+| project name, ip_address, vlan
+
+DeviceInfo
+| where ip_address == '10.10.2.1'
+
+NetworkFlow
+| summarize traffic=count() by dest_port
+|order by traffic desc
+| take 5
+
+NetworkFlow
+| where dest_port == 53
+| summarize count() by protocol
+
+NetworkFlow
+| summarize count() by protocol
+| order by count_ desc
+
+DnsEvents
+| take 10
+
+DnsEvents
+| take 5
+| project query_name, query_type, ttl
+
+DnsEvents
+| where query_name == 'docs.google.com'
+| where query_type == "A"
+| project timestamp, client_ip, query_name, resolved_ips
+| take 1
+
+NetworkFlow
+| where src_ip == "10.10.16.14"
+| where timestamp between (datetime(6/3/2025, 8:39:19 AM) .. datetime(6/3/2025, 8:59:19 AM)
+)
+| where dest_port == '53'
+| project timestamp, src_ip, dest_ip, dest_port, protocol
+| limit 10
+
+NetworkFlow
+| where src_ip == "10.10.16.14"
+| where dest_ip == "152.52.146.99"
+| project timestamp, src_ip, dest_ip, dest_port, protocol
+| take 1
+
+ProxyEvents
+| where src_ip == "10.10.16.14"
+| where domain == "docs.google.com"
+| where timestamp between (datetime(2025-06-03 08:50:00) .. datetime(2025-06-03 09:00:00))
+| project timestamp, src_ip, url, status_code
+| take 1
+
+ProxyEvents
+| take 5
+| project src_ip, url, method, status_code
+
+DnsEvents
+| where resolved_ips has "185.174.137.42"
+| distinct query_name
+
+DnsEvents
+| where query_name contains "update-cdn-service.xyz"
+| distinct  client_ip
+
+DnsEvents
+| where query_name contains 'update-cdn-service.xyz'
+| summarize count() by client_ip
+| order by count_ desc
+
+NetworkFlow
+| where dest_ip == "185.174.137.42"
+| project timestamp, src_ip, dest_ip, dest_port, protocol, bytes
+| take 10
+
+ProxyEvents
+| where domain == "update-cdn-service.xyz"
+| project timestamp, src_ip, url, method, status_code
+| order by timestamp asc
+
+Email
+| where sender !endswith "@whiskersandwonders.org"
+| where sender contains "whiskersandwonders"
+| project timestamp, sender, recipient, subject
+
+//get who got phished
+Email
+| where sender contains "whiskersandwonders-hr.com"
+| distinct recipient
+| count 
+
+//compare to C2 dns queries
+DnsEvents
+| where query_name contains 'update-cdn-service.xyz'
+| distinct client_ip
+
+// lets find out the time when those email came
+Email
+| where sender contains "whiskersandwonders-hr.com"
+| project timestamp, recipient
+| order by timestamp asc
+
+//when traffic C2 started
+DnsEvents
+| where query_name contains "update-cdn-service.xyz"
+| summarize first_query=min(timestamp) by client_ip
+| order by first_query asc
