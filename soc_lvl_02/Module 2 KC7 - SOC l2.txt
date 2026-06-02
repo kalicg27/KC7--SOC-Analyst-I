@@ -1,3 +1,44 @@
 Module 2 KC7 - SOC l2
 
 DonationPortal id = 10.10.0.3
+MailServer01 = 10.10.1.2
+DommainController = 10.10.2.1
+DNS-Server = 10.10.1.7, vlan = servers
+
+DnsEvents =  table is where you make DNS look ups
+65535 = maximum port numbers 
+ip are buiding address, ports are address of the apartment
+
+22 = ssh
+25 = smtp
+53 = dns
+80 = http
+443 = https
+3389 = rdp (windows remote desktop)
+
+DNS records:
+A record= maps a domain to an IPv4 address 
+AAAA record = maps a domain to an ipv6 address
+MX record = identifies the mail server for a domain
+CNAME record = create an aliad pointing to another domain
+
+domain 'update-cdn-service.xyz' resolved this ip = 185.174.137.42
+C2 = means Command and protocol
+
+noreply@whiskersandwonders-hr.com  - this suspicious sender
+[EXTERNAL] Important: Employee Benefits Update Required
+
+we found someone was in our network, 185.174.137.42 this ip resolved from domain 'update-cdn-service.xyz'
+our task is to find a chain. first we looked up to email, sender which is not our domain. we found that user with whiskersandwonders-hr.com domain send few email (9). 
+we have to go further and find out who linked. 
+3 people recept this email subject '[EXTERNAL] Important: Employee Benefits Update Required'
+those 3 people are also beaconing inside dns server C2 
+The chain is goes this way: attacker registered through fake hr domain and sent to 9 people inside company organizations, only 3 of them clicked it. Through them malware isntalled on their machine and began beaconing to this certain - update-cdn-service.xyz over port 443, which has been blended with normal HTTPS traffic, which makes it hard to find. 
+
+Details; first phishing email came to network email- 6/2/2025, 4:00:00 PM
+first C2 traffic events started from = 6/2/2025, 11:52:31 PM
+C2 traffic started after 7 hours  since email received
+
+
+
+
