@@ -1,0 +1,31 @@
+challange 3 = kc7
+email -  afomiya.storm@gmail.com
+
+name= Afomiya Storm, email = afomiya_storm@clouthaus.com, ip = 10.10.0.3, hostname= OQPA-DESKTOP
+role = Influencer Partner
+
+they used Kidus to bypass security question to reset her email
+
+sender who sent Dior email = collabs@dior-partners.com
+subject of that email phishing = [EXTERNAL] Exclusive Partnership Opportunity with Dior
+link = ["https://super-brand-offer.com/login"]
+
+Afomiya clicked on that link at 4/3/2025, 11:20:00 AM
+whole link https://super-brand-offer.com/login?username=afstorm&password=**********
+username = afstorm
+ip address 198.51.100.12, domain super-brand-offer.com
+domain that goes to this ip = super-brand-offer.com
+dior-partners.com
+influencer-deals.net
+
+her apartment name = The Apartments at CityCenter
+the ip that used to enter adamiya's account = 182.45.67.89, domain with this ip  = influencer-deals.net
+
+Windows NT 5.2
+
+attacker tried to get Venmo account- 
+attacker is planning to invite her on fake birthday party
+
+noreply@influencer-deals.net - used to send invoice from Adamiya email
+
+

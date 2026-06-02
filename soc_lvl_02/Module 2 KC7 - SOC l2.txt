@@ -1,0 +1,3 @@
+Module 2 KC7 - SOC l2
+
+DonationPortal id = 10.10.0.3
