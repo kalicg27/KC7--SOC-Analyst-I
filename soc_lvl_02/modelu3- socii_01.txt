@@ -1,1 +1,13 @@
 solvi systems a tae of supply chains and ISC
+
+total amount of Employee = 500
+Alexis Khoza = role CTO, ip 10.10.0.7, email = alexis_khoza@solvisystems.com
+
+xss attack is attack when code as script in inected in website in search bar or ii url 
+
+Opera/8.64.(X11; Linux x86_64; kok-IN) Presto/2.9.165 Version/10.00
+ip 98.117.26.236
+
+energy-trends4u.net
+news-on-industry.com
+eco-awareness-update.net
