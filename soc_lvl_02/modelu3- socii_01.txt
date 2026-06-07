@@ -18,6 +18,24 @@ net users /add gu@rd!an abc1toothree , time= 5/2/2024, 4:50:49 PM
 Copy-Item -Path \\\\solvisystems.com\\SharedDocs\\SoftwareDevelopment\\CycleDocuments\\* -Destination C:\\Users\\alpetrov\\CollectedData\\Software_Cycle_Docs
 
 
+Compress-Archive -Path C:\Users\alpetrov\CollectedData\* -DestinationPath C:\DataExfil\CollectedData.zip
+
+
+devportal
+
+SJ9V-MACHINE
+UPLM-DESKTOP
+JP4D-MACHINE
+
+10.10.0.1
+10.10.0.2
+10.10.0.3
+
+taylor_green@solvisystems.com
+jamie_lee@solvisystems.com
+alexei_petrov@solvisystems.com
+
+
 
 
 ________________________________________________________________
@@ -122,7 +140,7 @@ ProcessEvents
 
 ProcessEvents
 //| where timestamp =='5/2/2024, 8:27:40 AM'
-| where hostname == 'JUSP-LAPTOP'
+//| where hostname == 'JUSP-LAPTOP'
 |where process_commandline =='net use /PERSISTENT:YES'
 //| where timestamp between (datetime("2024-05-02") .. datetime("2024-05-04"))
 
@@ -141,3 +159,17 @@ ProcessEvents
 
 Employees
 | where hostname =='SJ9V-MACHINE'
+
+ProcessEvents
+//| where hostname =='SJ9V-MACHINE'
+| where process_commandline contains ".solvisystems.com"
+
+InboundNetworkEvents
+| where url contains ".solvisystems.com"
+
+Employees
+| where hostname has_any ("SJ9V-MACHINE","UPLM-DESKTOP","JP4D-MACHINE")
+
+Email
+| where sender has_any ("taylor_green@solvisystems.com","jamie_lee@solvisystems.com","alexei_petrov@solvisystems.com")
+| where subject has "software"
