@@ -29,3 +29,49 @@ only 2 ip address uses this domain = secure-health-access.com
 203.0.113.2
 additional domain that was associated with those ip = emr-help.net
 they did 37 requests inside our network
+they also made search inside network inside the website - how to bypass the security of hospital
+first request they did was - https://jojoshospital.org/search=JoJo%27s+Hospital+patient+records
+logging to first computer - 5/20/2024, 12:00:00 AM - by this ip 203.0.113.1, to Anthony Davis account successefully
+Anthony Davis = they purchased his credentials from another hacker
+
+But how the another hacker group get the access of Davis?
+
+domain of the add chicken store = raisinkanes.com - this domain was used in adds and sponsored in google search
+this is legimate domain of the restaraunt = raisingcanes.com
+we have 26 request in outboundnetwork to raisinkanes.com domain
+24 unique employes has visited this website
+the url redirect user to  =nothing-to-see-here.net
+totally-legit-domain.com
+after they get Raisin_Kane_Promo_Offer.docx
+Raisin_Kane_Free_Meal_Voucher.pdf
+first hostname that downloaded = RQJQ-MACHINE, time =5/1/2024, 9:56:50 AM
+sha256 = bd886046266b909a8ca5f19f16e5606baf73194a70632c81fdc44ef39ba29712, chrome.exe
+after that the attacker dropped cobaltstrike.exe
+process commandline = "C:\Program Files\Microsoft Office\Office16\WINWORD.EXE" "C:\Users\evbrowne\Downloads\Raisin_Kane_Promo_Offer.docx"
+they connect to 93.238.22.122 via cobal strike, over port 50050
+
+Next day, they start discovering the network 
+first command = systeminfo, 6 discovery command line was used
+
+
+AMFB-MACHINE - 93.238.22.122"
+
+5/14/2024, 12:24:45 PM
+
+advanced-ip-scanner.exe
+
+network_diagrams.pdf
+
+credentials.txt
+important_network_info.zip
+nothing-to-see-here.net
+
+
+
+
+
+
+
+
+
+
