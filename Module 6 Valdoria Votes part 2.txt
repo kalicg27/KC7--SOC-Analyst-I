@@ -1,1 +1,136 @@
 Module 6 Valdoria Votes part 2
+
+Notes/ Documentation
+we search first the employess, get ourself familiar with the stuff,  know who we  are dealing with.
+Employees:
+1- Deputy Commissioner, Hilary Binton, 10.10.0.30, hilary_binton@valdoriavotes.gov, hibinton
+2 - Dora Thomas, dora_thomas@valdoriavotes.gov, Polling Station Supervisor
+3 -Barry Schmelly, Temp Election Support Staff Supervisor
+4- Barry Schmelly, 10.10.0.12
+
+183 attemps to log in by username with first name William
+
+55.49.227.170 , valdoriavotesgov.com
+they were looking for technical+manual
+
+the fist time when our employes visited their fake domain - 10/7/2024, 10:46:45 AM
+10.10.0.4 - suspecisios activity from this user
+he did indeed put his cridentials to the fake login page from that suspicious domain- here is whole url -https://valdoriavotesgov.com/login?username=ansnooper&password=********** | time : 10/7/2024, 10:46:47 AM
+our hero is -=Anderson Snooper , ansnooper . In addition to all this chaous our hero did not turn on MFA at all. so he entered his real damn username and passwords
+Our threat actor got his first login to our system as ansnooper at 10/7/2024, 3:46:45 PM
+
+as Anderson account was compromised by our hacker - his fist email was with barry_schmelly@valdoriavotes.gov
+he was =  Temp Election Support Staff Supervisor
+attacker used this emails to ask about voting machines
+gpt-4o
+https://elections-chatbot.valdoriavotes.gov/?model=gpt-4o?prompt=How+do+I+access+the+voting+machines
+94bd6162-1323-402d-bccd-8fceaee5f230 -- this the id of conversation
+Dominos Voting Systems
+Election Commissioner
+
+our guy Arrack Bobama , arrack_bobama@valdoriavotes.gov
+the attacker ressetted his password  and logined 10/16/2024, 12:00:00 AM
+214.85.104.248
+help@dominosvotingsystems.com
+ValdoriaVotingMachinesNetworkGuide.pdf
+
+
+whole kql i used 
+
+Employees
+| where role == "Deputy Commissioner"
+
+Employees
+| where name == "Dora Thomas"
+
+Employees
+//| where role contains "supervisor"
+| where name == "Barry Schmelly"
+
+Email
+| where recipient == "barry_schmelly@valdoriavotes.gov"
+| count 
+
+ProcessEvents
+| where hostname == "GCH3-DESKTOP"
+| distinct process_commandline
+| count 
+
+let wills_ips = 
+Employees
+| where name has "William"
+| distinct ip_addr;
+OutboundNetworkEvents
+| where src_ip in (wills_ips)
+| distinct url
+| count 
+
+let w_username =
+Employees
+| where name has "William"
+| distinct username;
+AuthenticationEvents
+| where username in (w_username)
+| count 
+
+OutboundNetworkEvents
+| where src_ip contains "55.49.227.170"
+
+let sus_ips =
+PassiveDns
+//| where ip contains "55.49.227.170"
+| where domain has "valdoriavotesgov.com"
+| distinct ip ;
+InboundNetworkEvents
+| where src_ip in (sus_ips)
+
+
+OutboundNetworkEvents
+| where url contains "valdoriavotesgov"
+
+OutboundNetworkEvents
+| where src_ip =='10.10.0.4'
+
+Employees
+| where ip_addr == '10.10.0.4'
+
+AuthenticationEvents
+| where username == 'ansnooper' and result == "Successful Login"
+| where timestamp between(datetime(2024-10-05T10:46:47Z) .. datetime(2024-10-11T10:46:47Z)) 
+
+Email
+| where recipient == 'anderson_snooper@valdoriavotes.gov'
+//| where links has "valdoriavotesgov.com"
+| where timestamp between(datetime(2024-10-08) .. datetime(2024-10-12))
+
+Employees
+| where email_addr == 'barry_schmelly@valdoriavotes.gov'
+
+Email
+| where sender == 'anderson_snooper@valdoriavotes.gov'
+//| where links has "valdoriavotesgov.com"
+| where timestamp between(datetime(2024-10-08) .. datetime(2024-10-12))
+
+InboundNetworkEvents
+| where src_ip == '10.10.0.4'
+| where url contains "elections-chatbot"
+
+AIPrompts 
+| where prompt has "machines"
+
+AIPrompts
+| where conversation_id == '94bd6162-1323-402d-bccd-8fceaee5f230'
+
+Employees
+| where role contains "Election Commissioner"
+
+AuthenticationEvents
+| where username == "arbobama" and result == "Successful Login"
+| where timestamp between(datetime(2024-10-15) .. datetime(2024-10-17))
+
+Email
+| where sender == "arrack_bobama@valdoriavotes.gov"
+| where timestamp between(datetime(2024-10-15) .. datetime(2024-10-18))
+
+Email
+| where sender =="help@dominosvotingsystems.com"
