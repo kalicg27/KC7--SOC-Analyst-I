@@ -1,0 +1,35 @@
+Module 7 Encryptodera
+
+Nakia Acosta
+211.152.115.93
+
+321
+StackOverflow Copy Paster
+
+quite good kql 
+let employess_that_receivedEmail =
+Email
+| where sender == 'barry_shmelly@encryptoderafinancial.com'
+| where timestamp between(datetime(2024-01-16) .. datetime(2024-01-17))
+| where subject == "I'm not coming in today. I'm sick of this place. We're all getting laid off anyway."
+|distinct recipient;
+Employees
+| where email_addr in(employess_that_receivedEmail)
+| distinct role
+
+Chief Executive Officer got cursed by Barry
+https://www.cybersecurity-insiders.com/safe-ways-to-transfer-sensitive-files
+https://www.7-zip.org/a/7z2002-x64.exe
+https://www.wikihow.com/Use-a-USB-Flash-Drive
+SECRET_MergersAndAcquisitions_Strategy2025.docx
+ExecutiveSalaryNegotiations.docx
+Encryptodera_Proprietary_Algorithms.zip
+1/16/2024, 11:36:27 AM
+IGOY-DESKTOP
+1/16/2024, 12:18:16 PM
+1/16/2024, 12:18:16 PM - for algorithm
+
+
+1/16/2024, 11:36:27 AM 
+securePass123
+SchmellyDrive
