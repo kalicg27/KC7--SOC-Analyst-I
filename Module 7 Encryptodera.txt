@@ -33,3 +33,78 @@ IGOY-DESKTOP
 1/16/2024, 11:36:27 AM 
 securePass123
 SchmellyDrive
+
+day2 
+2/17/2024, 2:30:50 AM - we got new file called files_go_byebye.exe
+
+they had base64 encoding to hide the domain notification-finance-services.com
+before running powershell - he applied this code gpupdate /force
+the whole attack is ransomware 
+this command grupdate /force used legitimately to control settings in a network.
+306 devices runned this command
+
+8 machines runed discovery command , 2/2/2024, 3:32:36 AM
+first time we see discovery command at 2/2/2024, 3:32:36 AM
+2/17/2024, 2:34:54 AM this a day when we got attacked, after 15 days 
+first discovery was in 41QI-LAPTOP hostname
+attackers were in our network over than 2 weeks
+cmd.exe /C nltest /dclist:encryptoderafinancial.com
+Company_Financials_Q1_2024_Review.xlsx.exe - after this file creation on our network we see this file - screenconnect_client.exe  -  which appears on 3 devises
+
+barry_shmelly@encryptoderafinancial.com - send this files to 3 people
+Starting on 2024-02-01, it looks like Barry's account is used to send unusual emails. in Total 9 emails 
+bashmelly
+
+DOMAIN_CONTROLLER_SERVER - was logged by attacker - shit
+
+lihenry_domain_admin
+GJ95-LAPTOP
+S0002 - the if of the mimikatz
+totally_not_mimikatz.exe "sekurlsa::logonpasswords"
+
+valerie_orozco@encryptoderafinancial.com
+Employee_Contact_List_Updated_March_2024.docx.exe
+http://update-finance-security.biz/public/images/files/Employee_Contact_List_Updated_March_2024.docx.exe
+
+GJ95-LAPTOP
+
+2/1/2024, 3:59:30 AM
+
+So Robin WAS phished by Barry Shmelly's account!
+
+Let's recap. A threat actor 😈 compromised Barry Shmelly's account and logged into it from 143.38.175.105. Once the actor gained access to Barry's account, they used it to target 9 employees in a phishing 🎣 attack.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
