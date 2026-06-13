@@ -3,3 +3,114 @@ Note module 1 SOC III
 6aeef036eb85a470dbd6d039250172a510a8627b873e8b3b79fae5a7dd767e73 - //New_Diet_Plan_For_My_Love.xlsx
 
 Edge.exe
+
+whole kql 
+
+Employees
+| where name =="James Douglas"
+
+FileCreationEvents
+| where hostname =='UB9I-DESKTOP'
+| where filename has "DeTankWar"
+
+Email
+| where link has "detankwar.com"
+| distinct recipient
+| join kind=inner Employees on $left.recipient==$right.email_addr
+| distinct email_addr, name , role
+
+FileCreationEvents
+| where filename in~('nvunityplugin.dll',"unityplayer.dll")
+
+ProcessEvents
+| where process_commandline has "curl" and process_commandline has_any ("mingeloem.com","matrixane.com" )
+
+ProcessEvents
+| where process_commandline has "TopSecret.zip"
+
+ProcessEvents
+| where process_commandline has "StagingArea"
+
+Employees
+| where username =='chtaylor'
+
+ProcessEvents
+| where hostname == "IL5M-DESKTOP"
+| where process_commandline has "whoami"
+
+ProcessEvents
+| where hostname == "IL5M-DESKTOP"
+| where process_commandline has_all("echo", ">>", "logs.txt")
+| where process_commandline contains ("wmic")
+//| count
+
+//%temp%\Logs.txt
+
+ProcessEvents
+| where process_commandline has_all("echo", ">>", "logs.txt")
+| distinct hostname
+| join kind=inner Employees on $left.hostname==$right.hostname
+| distinct hostname, name , role
+
+ProcessEvents
+| where hostname == "IL5M-DESKTOP"
+| where timestamp between (datetime("2024-07-16") .. datetime("2024-07-18"))
+//7/17/2024, 10:47:43 AM
+//New_Diet_Plan_For_My_Love.xlsx
+
+FileCreationEvents
+| where filename has 'New_Diet_Plan_For_My_Love.xlsx'
+
+ProcessEvents
+| where hostname == "IL5M-DESKTOP"
+| where process_commandline has 'New_Diet_Plan_For_My_Love.xlsx'
+
+OutboundNetworkEvents
+| where src_ip =='10.10.0.79'
+| where url has "New_Diet_Plan_For_My_Love.xlsx"
+
+let sus_domains=
+Email
+| where sender =='marcella_flores@gmail.com'
+| extend domain = parse_url(link).Host
+| distinct tostring(domain);
+let sus_ips=
+PassiveDns
+| where domain in (sus_domains)
+| distinct ip;
+InboundNetworkEvents
+| where src_ip in(sus_ips)
+
+
+Email
+| where subject contains "data exfiltration"
+
+Employees
+//| where email_addr =='david_jackson@titanshield.com'
+| where email_addr =='david_mohamed@titanshield.com'
+
+OutboundNetworkEvents
+| where src_ip =="10.10.0.8"
+| where url has "google"
+
+Email
+| where recipient =='david_jackson@titanshield.com'
+
+InboundNetworkEvents
+| where url contains "google"
+
+OutboundNetworkEvents
+| where src_ip =="10.10.0.8"
+//| where url contains "www.google.com"
+
+Email
+| where sender =='marcella_flores@gmail.com'
+| where recipient =='david_mohamed@titanshield.com'
+
+InboundNetworkEvents
+| where src_ip =='10.10.0.150'
+
+OutboundNetworkEvents
+| where src_ip =="10.10.0.8"
+| where url contains "www.google.com/search"
+
