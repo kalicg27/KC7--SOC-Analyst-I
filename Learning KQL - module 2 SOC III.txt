@@ -1,0 +1,98 @@
+Learning KQL - module 2 SOC III
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+_______________________________________________________________________________________________________
+
+whole kql =
+ProcessEvents
+| where timestamp > datetime(2024-06-17T14:49:02Z)
+
+AuthenticationEvents
+| where timestamp >= startofday(datetime(2024-05-01))
+| where timestamp < startofday(datetime(2024-05-02))
+
+AuthenticationEvents
+| where timestamp <= endofday(datetime(2024-05-07))
+| where result == "Failed Login"
+
+
+AuthenticationEvents
+| where timestamp <= endofday(datetime(2024-06-19))
+| where result == "Failed Login"
+
+AuthenticationEvents
+| where timestamp between (datetime(2024-06-01).. datetime(2024-06-07))
+| where result == 'Failed Login'
+
+AuthenticationEvents
+| where timestamp >ago(24h)
+
+AuthenticationEvents
+| where result == 'Failed Login'
+| summarize hourly_failers = count() by bin(timestamp, 1h)
+| order by timestamp asc
+
+AuthenticationEvents
+| where result== 'Successful Login'
+| summarize total_logins= count()by src_ip
+| order by total_logins desc
+
+AuthenticationEvents
+| where result == "Failed Login"
+| summarize failed_attempts = count() by username, src_ip
+| sort by username asc
+
+ProcessEvents
+| summarize count() by process_name
+
+AuthenticationEvents
+| where result =='Failed Login'
+| summarize unique_accounts= dcount(username) by src_ip
+| where unique_accounts >1
+
+AuthenticationEvents
+| where result =='Successful Login'
+| summarize unique_accounts= dcount(username) by src_ip
+| where unique_accounts >1
+
+AuthenticationEvents
+| project hostname,timestamp,result, password_hash
+| where timestamp between (datetime(2024-05-01) .. datetime(2024-05-07))
+| where result ==  "Failed Login"
+| summarize count() by password_hash, hostname
+| where hostname =="48NM-LAPTOP"
+
+AuthenticationEvents
+| take 10
+
+AuthenticationEvents
+| where timestamp between (datetime(2024-05-01) .. datetime(2024-05-07))
+| where result =="Failed Login"
+
+AuthenticationEvents
+| where timestamp between (datetime(2024-05-01) .. datetime(2024-05-07))
+| where result =="Failed Login"
+| summarize count() by password_hash
+| sort by count_ desc
+| where count_ == 1
+
+AuthenticationEvents
+| where timestamp between (datetime(2024-05-01) .. datetime(2024-05-07))
+| where result =="Failed Login"
