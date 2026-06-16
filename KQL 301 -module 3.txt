@@ -1,0 +1,36 @@
+module 4 KQL 301
+
+Email
+| where links has "aspca.org"
+| lookup Employees on $left.recipient == $right.email_addr
+| distinct hostname, timestamp, role
+| sort by timestamp asc
+
+ProxyEvents
+| where domain in ("api-sync-updates.top", "update-cdn-service.xyz")
+
+Email
+| where sender == "noreply@whiskersandwonders-hr.com"
+| lookup Employees on $left.recipient == $right.email_addr
+| project-reorder timestamp, sender, recipient, ip_addr
+| mv-expand links to typeof(string)
+| lookup (
+    ProxyEvents
+) on $left.ip_addr == $right.src_ip, $left.links == $right.url
+| project email_sent_at=timestamp, sender, recipient, ip_addr, links, link_clickec_at= timestamp1
+
+ProxyEvents
+| take 10
+
+Email
+| take 1
+| mv-expand links to typeof(string)
+
+Email
+| where sender == "noreply@whiskersandwonders-hr.com"
+| lookup Employees on $left.recipient == $right.email_addr
+| project-reorder timestamp, sender, recipient, ip_addr
+
+Email
+| where sender == "noreply@whiskersandwonders-hr.com"
+| lookup Employees on $left.recipient == $right.email_addr
