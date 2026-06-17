@@ -34,3 +34,22 @@ Email
 Email
 | where sender == "noreply@whiskersandwonders-hr.com"
 | lookup Employees on $left.recipient == $right.email_addr
+
+Email
+| where sender=='diego_hernandez@whiskersandwonders.org'
+| join kind= leftouter Employees on $left.recipient== $right.email_addr 
+| project-reorder timestamp, sender, recipient, ip_addr
+
+Email
+| where sender=='diego_hernandez@whiskersandwonders.org'
+| join kind=inner Employees on $left.recipient==$right.email_addr
+|project-reorder timestamp, sender, recipient, ip_addr
+
+Email
+| where sender == "diego_hernandez@whiskersandwonders.org"
+| join kind=rightouter Employees on $left.recipient == $right.email_addr
+| where isempty(sender)
+| project name, email_addr
+
+
+| project-reorder timestamp, sender, recipient, ip_addr, email_addr, name
