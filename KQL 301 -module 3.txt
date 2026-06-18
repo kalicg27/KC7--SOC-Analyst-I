@@ -53,3 +53,59 @@ Email
 
 
 | project-reorder timestamp, sender, recipient, ip_addr, email_addr, name
+
+Email
+| where links has "update-cdn-service.xyz"
+| mv-expand links to typeof(string)
+| join kind=leftouter Employees on $left.recipient == $right.email_addr
+| join kind=leftouter (
+    ProxyEvents
+    | where url has "update-cdn-service.xyz"
+    ) on $left.ip_addr== $right.src_ip, $left.links==$right.url
+    | project timestamp, sender, recipient, links, clicked_at=timestamp1 
+    | where isempty(clicked_at)
+    
+Email
+| where links has 'api-sync-updates.top'
+| mv-expand links to typeof(string)
+| join kind=leftouter Employees on $left.recipient == $right.email_addr
+| join kind=leftouter (
+        ProxyEvents
+        | where url has "api-sync-updates.top"
+) on $left.ip_addr == $right.src_ip, $left.links==$right.url
+| project timestamp, sender, recipient, links, clicked_at=timestamp1
+
+Employees
+| join kind=leftanti(
+    AuthenticationEvents
+    | where timestamp between (datetime(2025-06-01) .. datetime(2025-06-07)) 
+) on $left.username == $right.username
+
+Employees
+| join kind=leftsemi (
+    AuthenticationEvents
+    | where timestamp between (datetime(2025-06-01) .. datetime(2025-06-07)) 
+) on $left.username == $right.username
+
+AuthenticationEvents
+| take 10
+
+Employees
+| join kind=leftanti AuthenticationEvents on $left.ip_addr == $right.src_ip 
+
+Email
+| where sender has "noreply@whiskersandwonders-hr.com"
+| join kind=leftouter Employees on $left.recipient == $right.email_addr
+| mv-expand links to typeof(string)
+| join kind=leftanti ProxyEvents on $left.ip_addr==$right.src_ip, $left.links == $right.url
+| project timestamp, sender, recipient, links
+
+
+ProxyEvents
+| take 10
+
+Employees
+| join kind=leftsemi (
+    Email
+    | where links has "update-cdn-service.xyz"
+) on $left.email_addr == $right.recipient
