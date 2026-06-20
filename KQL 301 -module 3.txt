@@ -109,3 +109,201 @@ Employees
     Email
     | where links has "update-cdn-service.xyz"
 ) on $left.email_addr == $right.recipient
+
+Employees
+| parse email_addr with username "@whiskersandwonders.org" domain
+| project name, username
+| sort by username desc 
+
+ProxyEvents
+| take 10
+| parse url with "https://" domain "/" *
+
+Employees
+| extend parts = split(email_addr, "@")
+| extend username = parts[0]
+| extend domain = parts[1]
+
+Employees
+| take 10
+
+FileCreationEvents
+| where username == 'pawilson'
+| extend parts = split()
+
+Email
+| extend sender_domain = split(sender, "@")[1]
+| summarize count() by tostring(sender_domain)
+| sort by count_ desc
+
+ProxyEvents
+| parse url with "https://" domain "/" *
+| distinct domain
+| summarize count() by domain
+
+| summarize count() by tostring(url)
+| sort by count_ desc
+
+ProxyEvents
+| distinct url
+| extend domain= tostring(parse_url(url).Host)
+| distinct domain
+
+
+//challenge 1
+
+Email
+| where sender has "noreply@whiskersandwonders-hr.com"
+| lookup Employees on $left.recipient == $right.email_addr
+| project name
+| summarize count() by name
+
+//challange 2
+
+Email
+| where sender has "noreply@whiskersandwonders-hr.com"
+| lookup Employees on $left.recipient == $right.email_addr
+| mv-expand links to typeof(string)
+| join kind=leftouter 
+        ProxyEvents    
+ on $left.ip_addr == $right.src_ip, $left.links==$right.url
+| project timestamp, sender, recipient, links, clicked_at=timestamp1, name
+
+//challange 3
+Email
+| where sender has "noreply@whiskersandwonders-hr.com"
+| distinct recipient
+| lookup Employees on $left.recipient == $right.email_addr
+| distinct hostname
+| lookup ProcessEvents on $left.hostname == $right.hostname
+| where process_commandline contains 'Port 443'
+
+Email
+| where sender has "noreply@whiskersandwonders-hr.com"
+| distinct recipient
+| lookup Employees on $left.recipient == $right.email_addr
+| distinct ip_addr
+| lookup NetworkFlow on $left.ip_addr==$right.src_ip
+| sort by timestamp desc
+| summarize start=min(timestamp), end=max(timestamp)
+| extend duration_minutes= datetime_diff("minute",end, start)
+
+ProxyEvents
+| take 2
+
+let phising_emails=
+Email
+| where sender has "noreply@whiskersandwonders-hr.com"
+| project timestamp;
+let c2=
+NetworkFlow 
+|where src_ip in("10.10.16.7","10.10.16.24","10.10.16.14")
+| project timestamp;
+union phising_emails, c2
+| summarize start=min(timestamp), end=max(timestamp)
+| extend duration_minutes = datetime_diff("minute", end, start)
+
+
+
+.show tables(ProxyEvents)
+
+NetworkFlow
+| take 1
+
+let phishing_email =
+Email
+| where sender has "noreply@whiskersandwonders-hr.com"
+| project timestamp;
+let c2 =
+NetworkFlow
+| where dest_port in (443,8443)
+| project timestamp;
+union phishing_email, c2
+| summarize start=min(timestamp), end=max(timestamp)
+| extend duration_minutes = datetime_diff("minute", end, start)
+
+Email
+| where sender has "noreply@whiskersandwonders-hr.com"
+| project timestamp
+| sort by timestamp asc
+
+Email
+| where sender has "noreply@whiskersandwonders-hr.com"
+| distinct recipient
+| lookup Employees on $left.recipient == $right.email_addr
+| distinct hostname
+| lookup ProcessEvents on $left.hostname == $right.hostname
+| sort by timestamp desc
+
+Email
+| where sender has "noreply@whiskersandwonders-hr.com"
+| distinct recipient
+| lookup Employees on $left.recipient == $right.email_addr
+| distinct ip_addr
+| lookup NetworkFlow on $left.ip_addr == $right.src_ip
+| sort by timestamp desc
+
+let phishing_email =
+Email
+| where sender has "noreply@whiskersandwonders-hr.com"
+| project timestamp
+| sort by timestamp desc
+| extend t_emails=timestamp;
+let c2n=
+NetworkFlow
+|where src_ip in("10.10.16.7","10.10.16.24","10.10.16.14")
+// where dest_port in (443,8443)
+| project timestamp;
+union phishing_email, c2n
+| summarize start=min(t_emails), end=max(timestamp)
+| extend duration_minutes = datetime_diff("minute", end, start)
+
+let phishing_email =
+Email
+| where sender has "noreply@whiskersandwonders-hr.com"
+| project timestamp
+| sort by timestamp desc
+| extend t_emails=timestamp;
+let c2pr=
+ProcessEvents
+|where hostname  in("2BPN-MACHINE","IIHO-DESKTOP","5GKV-DESKTOP")
+// where dest_port in (443,8443)
+| project timestamp;
+union phishing_email, c2pr
+| summarize start=min(t_emails), end=max(timestamp)
+| extend duration_minutes = datetime_diff("minute", end, start)
+
+let phishing_email =
+    Email
+    | where sender has "noreply@whiskersandwonders-hr.com"
+    | project timestamp
+    | sort by timestamp desc
+| extend t_emails=timestamp;
+let c2pr =
+    ProcessEvents
+    | where hostname in ("2BPN-MACHINE", "IIHO-DESKTOP", "5GKV-DESKTOP")
+    | project timestamp;
+let c2n =
+    NetworkFlow
+    | where src_ip in ("10.10.16.7", "10.10.16.24", "10.10.16.14")
+    | project timestamp;  
+union phishing_email, c2pr, c2n
+| summarize start = min(t_emails), end = max(timestamp)
+| extend duration_minutes = datetime_diff("minute", end, start)
+
+union(
+    Email
+    | where sender has "noreply@whiskersandwonders-hr.com"
+    | project timestamp),
+    (
+        NetworkFlow
+        | where src_ip in ("10.10.16.7", "10.10.16.24", "10.10.16.14")
+        | project timestamp
+    ),
+    (ProcessEvents
+    | where hostname in ("2BPN-MACHINE", "IIHO-DESKTOP", "5GKV-DESKTOP")
+    | project timestamp)
+    | summarize start = min(timestamp), end = max(timestamp)
+| extend duration_minutes = datetime_diff("minute", end, start)
+
+//6/2/2025, 4:48:00 PM
